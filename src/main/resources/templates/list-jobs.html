@@ -10,7 +10,12 @@
 
     <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
 
-    <!-- TODO #3 - Use the same list display from search.html -->
+    <h4 th:if="${jobs} and ${jobs.size() == 0}">No jobs found...</h4>
+    <table width="100%">
+        <tr th:each="job : ${jobs}">
+            <td th:each="column : ${job.keySet()}" th:text="${job.get(column)}"></td>
+        </tr>
+    </table>
 
 </div>
 

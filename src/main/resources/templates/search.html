@@ -8,35 +8,39 @@
 
 <div class="container body-content">
 
-    <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
+  <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
 
-    <form th:action="@{/search/results}">
-        <h2>Search by:</h2>
+  <form th:action="@{/search/results}">
+    <h2>Search by:</h2>
 
-        <p>
-            <span th:each="column : ${columns}">
-                <input
-                        type="radio"
-                        name="searchType"
-                        th:id="${column.key}"
-                        th:value="${column.key}"
-                        th:checked="${column.key == 'all'}"/>
-                <label th:for="${column.key}" th:text="${column.value}"></label>
-            </span>
+    <p>
+      <span th:each="column : ${columns}">
+        <input
+          type="radio"
+          name="searchType"
+          th:id="${column.key}"
+          th:value="${column.key}"
+          th:checked="${column.key == 'all'}"/>
+        <label th:for="${column.key}" th:text="${column.value}"></label>
+      </span>
+    </p>
 
-        </p>
+    <p>
+      <label for="searchTerm">Keyword:</label>
+      <input type="text" name="searchTerm" id="searchTerm" />
+    </p>
 
-        <p>
-            <label for="searchTerm">Keyword:</label>
-            <input type="text" name="searchTerm" id="searchTerm" />
-        </p>
+    <input type="submit" value="Search" />
+  </form>
 
-        <input type="submit" value="Search" />
-    </form>
+  <hr />
 
-    <hr />
-
-    <!-- TODO #2 - Loop over jobs map to display all job fields -->
+  <h4 th:if="${jobs} and ${jobs.size() == 0}">No jobs found...</h4>
+  <table width="100%">
+    <tr th:each="job : ${jobs}">
+      <td th:each="column : ${job.keySet()}" th:text="${job.get(column)}"></td>
+    </tr>
+  </table>
 
 </div>
 
