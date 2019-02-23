@@ -19,6 +19,7 @@ public class SearchController {
     @RequestMapping(value = "")
     public String search(Model model) {
         model.addAttribute("columns", ListController.columnChoices);
+        model.addAttribute("selected", "all");
         return "search";
     }
 
@@ -37,13 +38,14 @@ public class SearchController {
 
         model.addAttribute("columns", ListController.columnChoices);
         model.addAttribute("jobs", jobs);
+        model.addAttribute("selected", searchType);
 
         printJobs(jobs);
 
         return "search";
     }
 
-    // Print a list of jobs
+    // Print a list of jobs for debugging
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
 
         StringBuilder sb = new StringBuilder();
