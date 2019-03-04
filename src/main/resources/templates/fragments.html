@@ -27,5 +27,25 @@
         </div>
     </div>
 
+
+    <table th:fragment="jobs-table" class="table" th:if="${jobs}" width="100%">
+        <thead>
+        <tr>
+            <th th:each="column : ${jobs.get(0).keySet()}" th:text="${#strings.capitalizeWords(column)}">
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="job : ${jobs}">
+            <td th:each="column : ${job.keySet()}">
+                <div th:if='${column != "name"}'>
+                    <a th:href="@{/search/results(searchType=${column},searchTerm=${job.get(column)})}" th:text="${job.get(column)}"></a>
+                </div>
+                <div th:if='${column == "name"}' th:text="${job.get(column)}"></div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
 </body>
 </html>
