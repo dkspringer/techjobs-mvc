@@ -39,7 +39,8 @@
   <table class="table" th:if="${jobs}" width="100%">
     <thead>
       <tr>
-        <th th:each="column : ${columns}" th:text="${column.value}"></th>
+        <th th:each="column : ${jobs.get(0).keySet()}" th:text="${#strings.capitalizeWords(column)}">
+        </th>
       </tr>
     </thead>
     <tbody>
