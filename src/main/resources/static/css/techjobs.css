@@ -6,6 +6,11 @@ td, th {
     padding: 10px;
 }
 
+th {
+    background: black;
+    color: white;
+}
+
 tr:nth-child(odd) {
     background-color: #e4e4e4;
 }

@@ -13,9 +13,16 @@
     <h4 th:if="${jobs} and ${jobs.size() == 0}">No jobs found...</h4>
     <table width="100%">
         <tr th:each="job : ${jobs}">
-            <td th:each="column : ${job.keySet()}" th:text="${job.get(column)}"></td>
+            <td th:each="column : ${job.keySet()}">
+                <div th:if='${column != "name"}'>
+                    <a th:href="@{/search/results(searchType=${column},searchTerm=${job.get(column)})}" th:text="${job.get(column)}"></a>
+                </div>
+                <div th:if='${column == "name"}' th:text="${job.get(column)}"></div>
+            </td>
         </tr>
     </table>
+
+
 
 </div>
 
